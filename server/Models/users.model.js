@@ -7,7 +7,8 @@ const userSchema = new Schema(
         password: { type: String, required: true },
         phone: Number,
         location: String,
-        email: { type: String, required: true }
+        email: { type: String, required: true },
+        BlockedTime: Number
     },
     { versionKey: false, timestamps: true }
 );
