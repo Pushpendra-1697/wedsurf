@@ -1,9 +1,33 @@
-const express = require('express');
+const express = require("express");
 const app = express();
+const { connection } = require("./Configs/Config");
+require("dotenv").config();
+const cors = require("cors");
+const PORT = process.env.PORT || 3000; //defined port 8080 (default 3000) excluding 27017 (reserved port by Mongod);
 
+//Different Routers for different frontend pages in UI;
+const { userRouter } = require("./Routes/users.route");
 
+//Inbuilt middlewares;
+app.use(express.text());
+app.use(express.json());
+app.use(cors());
 
+//Landing/default route;
+app.get("/", async (req, res) => {
+    res.send("Welcome in Onboarding App😊!!!");
+});
 
-app.listen(port=8000, () => {
-    console.log('port running on port ' + port);
+//Fixed starting end points for making nested dynamic route;
+app.use('/users', userRouter);
+
+//server code for start or live my server at defined port;
+app.listen(PORT, async () => {
+    try {
+        await connection;
+        console.log("connected to DB");
+    } catch (e) {
+        console.log({ message: e.message });
+    }
+    console.log(`Server is running at port ${PORT}`);
 });
