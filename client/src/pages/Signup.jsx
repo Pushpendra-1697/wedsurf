@@ -154,6 +154,7 @@ const Signup = () => {
         >
             <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
                 <Stack align={"center"}>
+                    <Link to={'/'}><Heading fontSize={"4xl"} textAlign={"center"}>⬅️</Heading></Link>
                     <Heading fontSize={"4xl"} textAlign={"center"}>
                         Sign up to your account
                     </Heading>

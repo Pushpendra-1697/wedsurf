@@ -124,6 +124,7 @@ const Login = () => {
         >
             <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
                 <Stack align={"center"}>
+                    <Link to={'/signup'}><Heading fontSize={"4xl"} textAlign={"center"}>⬅️</Heading></Link>
                     <Heading fontSize={"4xl"} textAlign={"center"}>Sign in to your account</Heading>
                     <Text fontSize={"lg"} color={"gray.600"}>
                         to enjoy all of our cool <Link color={"blue.400"}>features</Link> ✌️

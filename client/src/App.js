@@ -6,7 +6,7 @@ import './styles/common.css';
 function App() {
   return (
     <Box>
-      <Navbar />
+      {/* <Navbar /> */}
       <AllRoutes />
     </Box>
   );
