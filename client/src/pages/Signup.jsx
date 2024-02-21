@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Flex,
     Box,
@@ -22,7 +22,7 @@ const initialState = {
     password: '',
     phone: '',
     name: '',
-    location: '',
+    location: ''
 };
 const Signup = () => {
     const [formData, setFormData] = useState(initialState);
@@ -31,6 +31,49 @@ const Signup = () => {
     const passwordError = document.getElementById('passwordError');
     const phoneNumberError = document.getElementById('phoneNumberError');
     const emailError = document.getElementById('emailError');
+    const [locationError, setLocationError] = useState('');
+    const [hasLocationPermission, setHasLocationPermission] = useState(false);
+
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+                if (result.state === 'granted') {
+                    setHasLocationPermission(true);
+                    getLocation();
+                }
+            });
+        }
+    }, []);
+
+    const getLocation = () => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                fetchLocation(latitude, longitude);
+            },
+            (error) => {
+                console.error('Error getting location:', error);
+                setLocationError('Error getting location. Please try again later.');
+            }
+        );
+    };
+
+    const fetchLocation = (latitude, longitude) => {
+        fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
+            .then(response => response.json())
+            .then(data => {
+                const city = data.city;
+                const region = data.principalSubdivision;
+                const country = data.countryName;
+                setFormData({ ...formData, location: `${city}, ${region}, ${country}` });
+            })
+            .catch(error => {
+                console.error('Error fetching location:', error);
+                setLocationError('Error fetching location. Please try again later.');
+            });
+    };
 
 
     const handleChange = (e) => {
@@ -77,6 +120,7 @@ const Signup = () => {
             return;
         }
         console.log(formData);
+        setFormData(initialState);
     };
 
     const { name, location, email, password, phone } = formData;
@@ -167,6 +211,27 @@ const Signup = () => {
                                 </InputGroup>
                                 <span id="passwordError" className="error"></span>
                             </FormControl>
+
+
+                            {hasLocationPermission && (
+                                <FormControl id="location" isRequired>
+                                    <FormLabel>Location</FormLabel>
+                                    <Input
+                                        type="text"
+                                        name="location"
+                                        value={location}
+                                        onChange={handleChange}
+                                        placeholder="Location"
+                                        readOnly
+                                    />
+                                </FormControl>
+                            )}
+
+                            {locationError && (
+                                <Text color="red.500" fontSize="sm">
+                                    {locationError}
+                                </Text>
+                            )}
 
                             <Stack spacing={10} pt={2}>
                                 <Button
