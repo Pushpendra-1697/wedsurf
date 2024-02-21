@@ -12,10 +12,13 @@ import {
     Heading,
     Text,
     useColorModeValue,
-    Spinner
+    Spinner,
+    useToast
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import axios from 'axios';
+import { backend_url } from '../components/BackendURL';
 
 const initialState = {
     email: '',
@@ -31,15 +34,13 @@ const Signup = () => {
     const passwordError = document.getElementById('passwordError');
     const phoneNumberError = document.getElementById('phoneNumberError');
     const emailError = document.getElementById('emailError');
-    const [locationError, setLocationError] = useState('');
-    const [hasLocationPermission, setHasLocationPermission] = useState(false);
-
+    const navigate = useNavigate();
+    const toast = useToast();
 
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.permissions.query({ name: 'geolocation' }).then((result) => {
                 if (result.state === 'granted') {
-                    setHasLocationPermission(true);
                     getLocation();
                 }
             });
@@ -55,7 +56,6 @@ const Signup = () => {
             },
             (error) => {
                 console.error('Error getting location:', error);
-                setLocationError('Error getting location. Please try again later.');
             }
         );
     };
@@ -71,7 +71,6 @@ const Signup = () => {
             })
             .catch(error => {
                 console.error('Error fetching location:', error);
-                setLocationError('Error fetching location. Please try again later.');
             });
     };
 
@@ -93,7 +92,7 @@ const Signup = () => {
         return phoneRegex.test(phoneNumber);
     }
 
-    const onSubmit = async (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
         let isValid = true;
         passwordError.textContent = '';
@@ -119,11 +118,33 @@ const Signup = () => {
         if (!isValid) {
             return;
         }
-        console.log(formData);
-        setFormData(initialState);
+        setLoading(true);
+        axios.post(`${backend_url}/users/register`, formData)
+            .then((res) => {
+                if (res.data) {
+                    setLoading(false);
+                    if (res.data.msg === "Registered Successfully") {
+                        toast({
+                            title: `${res.data.msg}`,
+                            status: "success",
+                            isClosable: true,
+                        });
+                        setFormData(initialState);
+                        navigate('/login');
+                    } else if (res.data.msg === "Registation failed") {
+                        toast({
+                            title: `${res.data.msg}`,
+                            status: "error",
+                            isClosable: true,
+                        });
+                    }
+                }
+            })
+            .catch((err) => console.log(err))
+            .finally(() => setLoading(false));
     };
 
-    const { name, location, email, password, phone } = formData;
+    const { name, email, password, phone } = formData;
     return (
         <Flex
             minH={"100vh"}
@@ -134,7 +155,7 @@ const Signup = () => {
             <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
                 <Stack align={"center"}>
                     <Heading fontSize={"4xl"} textAlign={"center"}>
-                        Sign up
+                        Sign up to your account
                     </Heading>
                     <Text fontSize={"lg"} color={"gray.600"}>
                         to enjoy all of our cool features ✌️
@@ -211,27 +232,6 @@ const Signup = () => {
                                 </InputGroup>
                                 <span id="passwordError" className="error"></span>
                             </FormControl>
-
-
-                            {hasLocationPermission && (
-                                <FormControl id="location" isRequired>
-                                    <FormLabel>Location</FormLabel>
-                                    <Input
-                                        type="text"
-                                        name="location"
-                                        value={location}
-                                        onChange={handleChange}
-                                        placeholder="Location"
-                                        readOnly
-                                    />
-                                </FormControl>
-                            )}
-
-                            {locationError && (
-                                <Text color="red.500" fontSize="sm">
-                                    {locationError}
-                                </Text>
-                            )}
 
                             <Stack spacing={10} pt={2}>
                                 <Button

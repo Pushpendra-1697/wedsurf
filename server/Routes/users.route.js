@@ -60,15 +60,19 @@ userRouter.get('/get', async (req, res) => {
     const { email } = req.headers;
 
     try {
-        const user = await UserModel.findOne({ email });
-        let BlockedTime = user.BlockedTime;
-        if (currentTime - BlockedTime >= 86400000 && BlockedTime !== undefined) {
-            await UserModel.updateOne({ email }, { $unset: { BlockedTime } });
-            res.send({ msg: "Not Blocked" });
-        } else if (currentTime - BlockedTime < 86400000 && BlockedTime !== undefined) {
-            res.send({ msg: "Blocked" });
+        const user = await UserModel.find({ email });
+        if (user.length > 0) {
+            let BlockedTime = user[0].BlockedTime;
+            if (currentTime - BlockedTime >= 86400000 && BlockedTime !== undefined) {
+                await UserModel.updateOne({ email }, { $unset: { BlockedTime } });
+                res.send({ msg: "Not Blocked" });
+            } else if (currentTime - BlockedTime < 86400000 && BlockedTime !== undefined) {
+                res.send({ msg: "Blocked" });
+            } else {
+                res.send({ msg: "Login Successful" });
+            }
         } else {
-            res.send({ msg: "Login Successful" });
+            res.status(201).send({ msg: "Wrong Email ID" });
         }
     } catch (err) {
         res.status(404).send({ msg: "Something went wrong😒" });
