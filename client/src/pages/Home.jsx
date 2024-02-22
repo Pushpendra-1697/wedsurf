@@ -1,10 +1,11 @@
 import React from 'react';
-import { Avatar, Box, Button, Center, Flex, Heading, Input, InputGroup, InputRightAddon, Modal, ModalBody, ModalCloseButton, ModalContent, Stack, useDisclosure, Text } from '@chakra-ui/react';
+import { Avatar, Box, Button, Center, Flex, Heading, Input, InputGroup, InputRightAddon, Modal, ModalBody, ModalContent, Stack, useDisclosure, Text, ModalFooter } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import EventCard from '../components/EventCard';
 import { useNavigate } from 'react-router-dom';
 import SlideShow from '../components/slideshow/SlideShow';
 import BottomNavBar from '../components/Navbar';
+import { CloseIcon } from '@chakra-ui/icons';
 
 let isAuth = localStorage.getItem('isAuth');
 let avatar = localStorage.getItem('avatar');
@@ -42,7 +43,6 @@ const Home = () => {
               />
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalContent w={{ base: '87%', md: '30%', sm: '43%', lg: '25%', xl: '15%', "2xl": '15%' }} position={'absolute'} right={6} top={2}>
-                  <ModalCloseButton />
                   <ModalBody>
                     <Flex align={'center'} justify={'center'} gap={'10px'} flexFlow={'column'}>
                       {name && <Text>{name}</Text>}
@@ -51,6 +51,9 @@ const Home = () => {
                       </Button>
                     </Flex>
                   </ModalBody>
+                  <ModalFooter>
+                    <CloseIcon onClick={onClose} cursor={'pointer'} />
+                  </ModalFooter>
                 </ModalContent>
               </Modal>
             </Center>
