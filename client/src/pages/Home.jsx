@@ -1,8 +1,9 @@
 import React from 'react';
-import { Avatar, Box, Button, Center, Flex, Heading, Input, InputGroup, InputRightAddon, Modal, ModalBody, ModalCloseButton, ModalContent, Stack, useDisclosure, Text, ModalOverlay } from '@chakra-ui/react';
+import { Avatar, Box, Button, Center, Flex, Heading, Input, InputGroup, InputRightAddon, Modal, ModalBody, ModalCloseButton, ModalContent, Stack, useDisclosure, Text } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import EventCard from '../components/EventCard';
 import { useNavigate } from 'react-router-dom';
+import SlideShow from '../components/slideshow/SlideShow';
 
 let isAuth = localStorage.getItem('isAuth');
 let avatar = localStorage.getItem('avatar');
@@ -38,7 +39,7 @@ const Home = () => {
               cursor={isAuth ? 'pointer' : 'default'}
             />
             <Modal isOpen={isOpen} onClose={onClose}>
-              <ModalContent w={{base:'87%', md:'30%', sm:'43%', lg:'25%', xl:'15%', "2xl":'15%'}} position={'absolute'} right={6} top={2}>
+              <ModalContent w={{ base: '87%', md: '30%', sm: '43%', lg: '25%', xl: '15%', "2xl": '15%' }} position={'absolute'} right={6} top={2}>
                 <ModalCloseButton />
                 <ModalBody>
                   <Flex align={'center'} justify={'center'} gap={'10px'} flexFlow={'column'}>
@@ -64,7 +65,7 @@ const Home = () => {
             <InputRightAddon children={<SearchIcon color={'white'} boxSize={6} />} bg={'black'} />
           </InputGroup>
         </Box>
-        <Box>Slider</Box>
+        <SlideShow />
         <Box display={'flex'} flexDirection={'column'} gap={{ base: '17px', '2xl': '16px', xl: '17px', lg: '19px', md: '18px', sm: '14px' }}>
           <Heading size={'xl'}>Dive in</Heading>
           <Box display={'grid'} gridTemplateColumns={{ base: 'repeat(1,1fr)', '2xl': 'repeat(3,1fr)', xl: 'repeat(2,1fr)', lg: 'repeat(2,1fr)', md: 'repeat(2,1fr)', sm: 'repeat(2,1fr)' }} gap={{ base: '15px', '2xl': '20px', xl: '22px', lg: '20px', md: '19px', sm: '17px' }}>
@@ -75,7 +76,6 @@ const Home = () => {
           </Box>
         </Box>
       </Stack>
-      <Box h={'40vh'}></Box>
     </Box>
   );
 }
