@@ -6,7 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <ChakraProvider toastOptions={{ defaultOptions: { position: 'top' } }}>
+    <ChakraProvider toastOptions={{ defaultOptions: { position: 'bottom' } }}>
         <BrowserRouter>
             <App />
         </BrowserRouter>

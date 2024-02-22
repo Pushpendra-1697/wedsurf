@@ -11,6 +11,7 @@ const Landing = () => {
   const handleCallbackResponse = (response) => {
     var userObject = jwt_decode(response.credential);
     if (userObject?.email_verified) {
+      localStorage.setItem('isAuth', true);
       localStorage.setItem('name', userObject.name);
       localStorage.setItem('avatar', userObject.picture);
       toast({
@@ -55,6 +56,7 @@ const Landing = () => {
 
         <Button
           size="lg"
+          isDisabled
           bg={"blue.400"}
           color={"white"}
           _hover={{

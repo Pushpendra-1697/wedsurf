@@ -13,7 +13,8 @@ import {
     Text,
     useColorModeValue,
     Spinner,
-    useToast
+    useToast,
+    InputLeftAddon
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -184,14 +185,17 @@ const Signup = () => {
 
                             <FormControl id="phone" isRequired>
                                 <FormLabel>Phone number</FormLabel>
-                                <Input
-                                    type="number"
-                                    name="phone"
-                                    value={phone}
-                                    onChange={handleChange}
-                                    placeholder="Enter Phone number"
-                                    required
-                                />
+                                <InputGroup>
+                                    <InputLeftAddon children='+91' bg={'red.100'} />
+                                    <Input
+                                        type="number"
+                                        name="phone"
+                                        value={phone}
+                                        onChange={handleChange}
+                                        placeholder="Enter Phone number"
+                                        required
+                                    />
+                                </InputGroup>
                                 <span id="phoneNumberError" className="error"></span>
                             </FormControl>
 

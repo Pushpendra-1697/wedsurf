@@ -1,10 +1,11 @@
 const { Router } = require('express');
 const authRouter = Router();
 const twilio = require('twilio');
+require('dotenv').config();
 
 // Twilio credentials
-const accountSid = 'AC102f7e174b6599c89f048a36e7e77779';
-const authToken = 'c53a6d068757e3b30914d5140422e7b2';
+const accountSid = process.env.accountSid;
+const authToken = process.env.authToken;
 const client = new twilio(accountSid, authToken, {
     autoRetry: true,
     maxRetries: 3
@@ -26,7 +27,7 @@ authRouter.post('/send-otp', (req, res) => {
 
     client.messages.create({
         body: `Your OTP for authentication: ${otp}`,
-        from: '+18582175686',
+        from: process.env.TwilioPhoneNumber,
         to: phoneNumber
     }).then(message => {
         res.status(200).send({ msg: `OTP sent successfully to ${phoneNumber}` });
@@ -44,7 +45,7 @@ authRouter.post('/verify-otp', (req, res) => {
     if (Number(otp) === storedOTP) {
         res.status(200).send({ msg: 'OTP verified successfully' });
     } else {
-        res.status(401).send({ msg: 'Invalid OTP' });
+        res.send({ msg: 'Invalid OTP' });
     }
 });
 
