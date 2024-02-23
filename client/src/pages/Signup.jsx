@@ -35,6 +35,7 @@ const Signup = () => {
     const passwordError = document.getElementById('passwordError');
     const phoneNumberError = document.getElementById('phoneNumberError');
     const emailError = document.getElementById('emailError');
+    const userNameError = document.getElementById('userNameError');
     const navigate = useNavigate();
     const toast = useToast();
 
@@ -107,13 +108,25 @@ const Signup = () => {
         return phoneRegex.test(phoneNumber);
     }
 
+    function isValidUserName(userName) {
+        // If there are leading or trailing spaces
+        const userNameRegex = /^\s+|\s+$/g;
+        return userNameRegex.test(userName);
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
         let isValid = true;
         passwordError.textContent = '';
         emailError.textContent = '';
         phoneNumberError.textContent = '';
+        userNameError.textContent = '';
 
+        // Username validation
+        if(isValidUserName(formData.name)) {
+            isValid = false;
+            userNameError.textContent = 'Should not have leading or trailing spaces';
+        }
         // Phone number validation
         if (!isValidPhoneNumber(formData.phone)) {
             isValid = false;
@@ -195,6 +208,7 @@ const Signup = () => {
                                     placeholder="Enter Username"
                                     required
                                 />
+                                <span id="userNameError" className="error"></span>
                             </FormControl>
 
                             <FormControl id="phone" isRequired>
