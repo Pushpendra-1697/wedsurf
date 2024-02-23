@@ -41,8 +41,22 @@ const Signup = () => {
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+                console.log(result);
                 if (result.state === 'granted') {
                     getLocation();
+                } else if (result.state === 'prompt') {
+                    toast({
+                        title: `Permissions requested. Waiting for user input...`,
+                        status: "success",
+                        isClosable: true,
+                    });
+                    getLocation();
+                } else {
+                    toast({
+                        title: `User denied Geolocation!! Sorry 😒`,
+                        status: "error",
+                        isClosable: true,
+                    });
                 }
             });
         }
