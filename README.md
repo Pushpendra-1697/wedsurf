@@ -35,7 +35,7 @@ Clone the Repository from GitHub. Then do the following steps:
 React (JSX Syntax), Chakra-ui Library for Styling & Modal, Axios for handling asynchronous requests, react-router-dom for routing or Navigate from one page to another, Standard react components, React-hooks, chakra-icons & react-icons, react-slideshow-image for carousel slider and jwt-decode for decode the token.
 
 ### B) Backend :
-Node.js, Express.js, MongoDB (NoSQL), JSON-web-token-based authentication, mongoose for connecting database to the server, cors for handling the cors error, BSON, Bsondump, bcrypt for hashing password (secure password), Twilio for OTP-based authentication, cors for handing the cors error and dotenv for A zero-dependency module that loads environment variables from a .env file into process.env.
+Node.js, Express.js, MongoDB (NoSQL), JSON-web-token-based authentication, mongoose for connecting database to the server, cors for handling the cors error, BSON, Bsondump, crypto for generate secure otp, bcrypt for hashing password (secure password), Twilio for OTP-based authentication, cors for handing the cors error and dotenv for A zero-dependency module that loads environment variables from a .env file into process.env.
 
 ## PORT Used :
 

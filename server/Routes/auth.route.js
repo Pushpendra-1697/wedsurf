@@ -2,6 +2,7 @@ const { Router } = require('express');
 const authRouter = Router();
 const twilio = require('twilio');
 require('dotenv').config();
+const crypto = require('crypto');
 
 // Twilio credentials
 const accountSid = process.env.accountSid;
@@ -13,7 +14,7 @@ const client = new twilio(accountSid, authToken, {
 
 // Generate random OTP
 function generateOTP() {
-    return Math.floor(100000 + Math.random() * 900000);
+    return crypto.randomInt(100000, 1000000);
 };
 
 // Store generated OTPs and associated phone numbers
