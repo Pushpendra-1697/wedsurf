@@ -59,6 +59,20 @@ Node.js, Express.js, MongoDB (NoSQL), JSON-web-token-based authentication, mongo
 
 ## Some Project Screenshots :
 ### A) For Computer Screen:
-
+![Screenshot (506)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/dd72653f-28d3-4fdb-bf4e-91bdc7b2fa68)
+![Screenshot (507)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/5713316e-22fe-466c-8abd-2e2988b24489)
+![Screenshot (508)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/a7ca82be-f593-4333-a8cd-b6cae5affa0d)
+![Screenshot (509)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/0df47354-8b4b-4f18-a73a-e22c7c594296)
+![Screenshot (510)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/1bb28203-670b-4b38-84ec-478ccb21b243)
+![Screenshot (511)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/89820d27-8f56-4512-8b80-6b1ea57ec0fb)
+![Screenshot (512)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/e1c33851-be79-4587-be8f-0e851d003e15)
+![Screenshot (520)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/17e4c317-301d-4280-8668-69b864bd83da)
 
 #### B) For Mobile/Tablet Screen :
+![Screenshot (513)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/c9dbcf6e-0ba6-469d-af25-3c1425efaff7)
+![Screenshot (514)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/1e40fdd6-ca0e-446e-a37c-9037f731542f)
+![Screenshot (515)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/b3ca36e4-bc29-467f-a6e6-16f6cf37fccf)
+![Screenshot (516)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/1fb92347-453b-48c9-830a-d3fffd7242e3)
+![Screenshot (517)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/c7e3614c-d1ea-4aba-af62-8c2a4a6c3794)
+![Screenshot (518)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/c1c7a2a4-81f3-4942-81fd-f59dd8eac1d9)
+![Screenshot (519)](https://github.com/Pushpendra-1697/wedsurf/assets/104748364/6b9f97ca-9172-4b20-9c58-52e9aa8b8bc5)
