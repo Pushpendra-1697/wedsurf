@@ -2,7 +2,7 @@
 
 ## Overview
 
-This React onboarding project includes pages for login, signup, home, and profile functionalities, catering to user authentication and navigation, and facilitating a seamless design experience.
+This React onboarding project includes pages for login, signup, home, and profile functionalities, catering to user authentication and navigation, and facilitating a seamless design experience. The user will be blocked for the next 24 hours after putting 5 times wrong password at the time of token-based login.
 
 ## Frontend Verecel Deployed Link :
 ```bash
